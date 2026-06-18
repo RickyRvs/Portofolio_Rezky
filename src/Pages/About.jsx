@@ -218,8 +218,8 @@ const AboutPage = () => {
               </div>
 
               <blockquote className="text-slate-600 text-center lg:text-left italic font-medium text-sm relative z-10 pl-6">
-                "Leveraging AI as a professional tool, not a replacement."
-              </blockquote>
+  "Turning curiosity into solutions, one commit at a time."
+</blockquote>
             </div>
 
             <div className="flex flex-col lg:flex-row items-center lg:items-start gap-4 lg:gap-4 lg:px-0 w-full">
