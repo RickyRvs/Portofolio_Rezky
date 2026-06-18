@@ -1,66 +1,68 @@
-import React from 'react';
-import { Home, ArrowLeft } from 'lucide-react';
-
-export default function NotFoundPage() {
-  const handleGoBack = () => {
-    window.history.back();
-  };
-
-  const handleGoHome = () => {
-    // In a real app, you would use your router's navigation
-    window.location.href = '/';
-  };
-
+import React from "react";
+import { Home, ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+ 
+export function NotFoundPage() {
+  const navigate = useNavigate();
+ 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4">
-      <div className="text-center">
-        {/* 404 Number */}
-        <div className="mb-8">
-          <h1 className="text-9xl font-bold text-gray-800 mb-4 animate-bounce">
+    <div className="min-h-screen flex items-center justify-center px-[5%] relative overflow-hidden">
+      {/* Blobs */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/3 left-1/4 w-72 h-72 bg-violet-200 rounded-full mix-blend-multiply filter blur-[80px] opacity-40 animate-pulse" />
+        <div className="absolute bottom-1/3 right-1/4 w-72 h-72 bg-indigo-200 rounded-full mix-blend-multiply filter blur-[80px] opacity-40 animate-pulse" />
+      </div>
+ 
+      <div className="relative z-10 text-center">
+        {/* 404 */}
+        <div className="mb-6">
+          <h1 className="text-[8rem] sm:text-[10rem] font-bold leading-none bg-gradient-to-r from-[#6366f1] to-[#a855f7] bg-clip-text text-transparent select-none">
             404
           </h1>
-          <div className="w-24 h-1 bg-indigo-500 mx-auto rounded-full"></div>
+          <div className="w-20 h-0.5 bg-gradient-to-r from-[#6366f1] to-[#a855f7] mx-auto rounded-full" />
         </div>
-
+ 
         {/* Message */}
         <div className="mb-8">
-          <h2 className="text-3xl font-semibold text-gray-700 mb-4">
+          <h2 className="text-2xl sm:text-3xl font-semibold text-slate-700 mb-3">
             Oops! Halaman Tidak Ditemukan
           </h2>
-          <p className="text-lg text-gray-600 max-w-md mx-auto leading-relaxed">
-            Halaman yang Anda cari mungkin telah dipindahkan, dihapus, atau tidak pernah ada.
+          <p className="text-slate-400 max-w-md mx-auto leading-relaxed">
+            Halaman yang kamu cari mungkin telah dipindahkan, dihapus, atau tidak pernah ada.
           </p>
         </div>
-
-        {/* Illustration */}
-        <div className="mb-8">
-          <div className="w-32 h-32 mx-auto bg-indigo-100 rounded-full flex items-center justify-center mb-6">
-            <div className="text-6xl">🔍</div>
+ 
+        {/* Icon */}
+        <div className="mb-10">
+          <div className="relative inline-block group">
+            <div className="absolute -inset-3 bg-gradient-to-r from-[#6366f1] to-[#a855f7] rounded-full blur opacity-10 group-hover:opacity-20 transition duration-500" />
+            <div className="relative w-20 h-20 rounded-full bg-indigo-50 border border-indigo-100 flex items-center justify-center text-4xl shadow-sm">
+              🔍
+            </div>
           </div>
         </div>
-
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+ 
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button
-            onClick={handleGoBack}
-            className="flex items-center gap-2 px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors duration-200 shadow-md hover:shadow-lg"
+            onClick={() => navigate(-1)}
+            className="group flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-slate-200 text-slate-600 hover:text-indigo-600 hover:border-indigo-200 hover:bg-indigo-50 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] bg-white shadow-sm"
           >
-            <ArrowLeft size={20} />
+            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform duration-300" />
             Kembali
           </button>
-          
+ 
           <button
-            onClick={handleGoHome}
-            className="flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors duration-200 shadow-md hover:shadow-lg"
+            onClick={() => navigate("/")}
+            className="group flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#6366f1] to-[#a855f7] text-white font-medium transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-indigo-200 active:scale-[0.98]"
           >
-            <Home size={20} />
+            <Home className="w-4 h-4" />
             Beranda
           </button>
         </div>
-
-       
-
       </div>
     </div>
   );
 }
+ 
+export default NotFoundPage;

@@ -361,52 +361,41 @@ export default function Projects() {
     return data.publicUrl;
   };
 
-  const handleCreate = async (form, file) => {
-    setUploading(true);
-    let imgUrl = "";
-    if (file) imgUrl = await uploadImage(file);
-    await supabase.from("projects").insert({
-      Title: form.Title,
-      Description: form.Description,
-      Img: imgUrl,
-      TechStack: form.TechStack.split(",")
-        .map((s) => s.trim())
-        .filter(Boolean),
-      Features: form.Features.split(",")
-        .map((s) => s.trim())
-        .filter(Boolean),
-      Link: form.Link,
-      Github: form.Github,
-    });
-    setShowCreate(false);
-    setUploading(false);
-    fetchProjects();
-  };
+const handleCreate = async (form, file) => {
+  setUploading(true);
+  let imgUrl = "";
+  if (file) imgUrl = await uploadImage(file);
+  await supabase.from("projects").insert({
+    title: form.Title,
+    description: form.Description,
+    img: imgUrl,
+    tech_stack: form.TechStack.split(",").map((s) => s.trim()).filter(Boolean),
+    features: form.Features.split(",").map((s) => s.trim()).filter(Boolean),
+    link: form.Link,
+    github: form.Github,
+  });
+  setShowCreate(false);
+  setUploading(false);
+  fetchProjects();
+};
 
-  const handleEdit = async (form, file) => {
-    setUploading(true);
-    let imgUrl = editProject.Img || "";
-    if (file) imgUrl = await uploadImage(file);
-    await supabase
-      .from("projects")
-      .update({
-        Title: form.Title,
-        Description: form.Description,
-        Img: imgUrl,
-        TechStack: form.TechStack.split(",")
-          .map((s) => s.trim())
-          .filter(Boolean),
-        Features: form.Features.split(",")
-          .map((s) => s.trim())
-          .filter(Boolean),
-        Link: form.Link,
-        Github: form.Github,
-      })
-      .eq("id", editProject.id);
-    setEditProject(null);
-    setUploading(false);
-    fetchProjects();
-  };
+const handleEdit = async (form, file) => {
+  setUploading(true);
+  let imgUrl = editProject.img || "";
+  if (file) imgUrl = await uploadImage(file);
+  await supabase.from("projects").update({
+    title: form.Title,
+    description: form.Description,
+    img: imgUrl,
+    tech_stack: form.TechStack.split(",").map((s) => s.trim()).filter(Boolean),
+    features: form.Features.split(",").map((s) => s.trim()).filter(Boolean),
+    link: form.Link,
+    github: form.Github,
+  }).eq("id", editProject.id);
+  setEditProject(null);
+  setUploading(false);
+  fetchProjects();
+};
 
   const deleteProject = async (id) => {
     if (!confirm("Delete this project?")) return;
